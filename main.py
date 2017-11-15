@@ -1,28 +1,15 @@
 
 # coding: utf-8
 
-# In[6]:
+# In[58]:
 
 import jieba
 import jieba.posseg as pseg
 jieba.load_userdict('./IRAssignment-master/dict.txt.big.txt')
 
 
-# In[35]:
+# In[59]:
 
-# vec=[]
-# for i in range(1,41):
-#     content = open('./articles/'+str(i)+'.txt', 'rb').read()
-#     words = pseg.cut(content)
-#     temp = {}
-#     for word in words:
-#         if temp.has_key(word.word):
-#             temp[word.word]+=1
-#         else:
-#             temp.update({word.word:1})
-#     print str(i) + ".txt is finished"
-#     vec.append(temp)
-#     content.close()
 top = 0
 temp = {}
 for i in range(1,41):
@@ -32,14 +19,10 @@ for i in range(1,41):
         if not temp.has_key(word.word):
             temp.update({word.word:top})
             top+=1
-    print str(i) + ".txt is finished"
-# content = open('./articles/1.txt', 'rb').read()
-# words = pseg.cut(content)
-# for word in words:
-#     print word.word + "/",
+#     print str(i) + ".txt is finished"
 
 
-# In[37]:
+# In[60]:
 
 vec = []
 for i in range(1,41):
@@ -49,15 +32,10 @@ for i in range(1,41):
     for word in words:
         temp_vec[temp[word.word]]+=1
     vec.append(temp_vec)
-    print str(i) + ".txt is finished"
+#     print str(i) + ".txt is finished"
 
 
-# In[40]:
-
-print vec[39]
-
-
-# In[23]:
+# In[61]:
 
 from math import sqrt
 import random
@@ -78,12 +56,7 @@ def readfile(filename):
     return (rownames, colnames, data)
 
 
-# In[25]:
-
-blognames,words,data = readfile('./IRAssignment-master/blogdata.txt')
-
-
-# In[26]:
+# In[62]:
 
 def cosine(v1, v2):
     inner_product = sum([ v1[i]*v2[i] for i in range(len(v1))])
@@ -93,13 +66,7 @@ def cosine(v1, v2):
     return cosine
 
 
-# In[41]:
-
-for i in range(len(vec[1])):
-    print vec[1][i]
-
-
-# In[28]:
+# In[63]:
 
 class bicluster:
 
@@ -160,12 +127,12 @@ def hcluster(rows, distance=cosine):
     return clust[0]
 
 
-# In[42]:
+# In[64]:
 
 cluster_result = hcluster(vec)
 
 
-# In[43]:
+# In[65]:
 
 def getheight(clust):
   # Is this an endpoint? Then the height is just 1
@@ -261,10 +228,51 @@ def drawnode(
         draw.text((x + 5, y - 7), labels[clust.id], (0, 0, 0))
 
 
-# In[50]:
+# In[66]:
 
 from PIL import Image, ImageDraw
+chapters_name = ["第一章　滅門",
+"第二章　聆秘",
+"第三章　救難",
+"第四章　坐鬥",
+"第五章　治傷",
+"第六章　洗手",
+"第七章　授譜",
+"第八章　面壁",
+"第九章　邀客",
+"第十章　傳劍",
+"第十一章　聚氣",
+"第十二章　圍攻",
+"第十三章　學琴",
+"第十四章　論杯",
+"第十五章　灌藥",
+"第十六章　注血",
+"第十七章　傾心",
+"第十八章　聯手",
+"第十九章　打賭",
+"第二十章　入獄",
+"第二十一章　囚居",
+"第二十二章　脫困",
+"第二十三章　伏擊",
+"第二十四章　蒙冤",
+"第二十五章　聞訊",
+"第二十六章　圍寺",
+"第二十七章　三戰",
+"第二十八章　積雪",
+"第二十九章　掌門",
+"第三十章　密議",
+"第三十一章　繡花",
+"第三十二章　併派",
+"第三十三章　比劍",
+"第三十四章　奪帥",
+"第三十五章　復仇",
+"第三十六章　傷逝",
+"第三十七章　迫娶",
+"第三十八章　聚殲",
+"第三十九章　拒盟",
+"第四十章　曲諧"]
 drawdendrogram(cluster_result,[str(i) for i in range(1,41)],jpeg='blogclust.jpg')
 
 
-# In[51]:
+# In[67]:
+
