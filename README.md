@@ -4,3 +4,5 @@ Comparing the ratio of similarity between chapters in 笑傲江湖(The Smiling, 
 You can see the process in main.ipynb.
 
 If you want to run code by yourself, just run main.ipynb.
+
+It was a homework of Information retrieval.
